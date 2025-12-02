@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login de Administrador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Painel de Administração</h2>
+        <form id="formLogin">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" required>
+            </div>
+
+            <button type="submit">Entrar</button>
+        </form>
+        <div id="mensagemErro" class="error"></div>
+    </div>
+
+    <script src="js/js/jquery-3.6.4.min.js"></script>
+    <script src="js/js/api.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#formLogin').submit(function(e) {
+                e.preventDefault();
+
+                var objLoginSenha = {
+                    email: $('#email').val(),
+                    senha: $('#senha').val()
+                };
+
+                // Usa a função validarUsuario da API
+                if (validarUsuario(objLoginSenha)) {
+                    window.location.href = 'mensagens.html';
+                } else {
+                    $('#mensagemErro').text('E-mail e Senha inválidos').show();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
